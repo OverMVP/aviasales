@@ -1,0 +1,41 @@
+.pageWrapper {
+  display: flex;
+  width: 100%;
+  min-width: 320px;
+  justify-content: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  max-width: 755px;
+  min-width: 320px;
+  gap: 20px;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.asideWrapper {
+  display: flex;
+  height: 100vh;
+  @media (max-width: 768px) {
+    height: auto;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 20px;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}
