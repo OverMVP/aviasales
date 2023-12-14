@@ -1,11 +1,10 @@
-import { createStore, combineReducers } from "redux"
-import { ticketOptionsReducer } from "./reducers/ticketOptionsReducer"
-import { filterReducer } from "./reducers/filterReducer"
+import { createStore, combineReducers, applyMiddleware } from "redux"
 import { composeWithDevTools } from "@redux-devtools/extension"
+import { thunk } from "redux-thunk"
+import { ticketsListReducer } from "./reducers/ticketsListReducer/ticketsListReducer"
 
 const rootReducer = combineReducers({
-  filterReducer,
-  ticketOptionsReducer,
+  ticketsListReducer,
 })
-
-export const store = createStore(rootReducer, composeWithDevTools())
+//@ts-ignore
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

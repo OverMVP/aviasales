@@ -5,23 +5,24 @@ import { setCheapest, setFastest } from "../../store/actions/filterActions"
 
 const { "ticket-list-filter": formStyle, "label-filter": labelFilter, checked } = styles
 
-function isCheapestSelected(value: any): any {
-  if (value === "CHEAPEST") return true
+function isCheapestSelected(state: any): any {
+  if (state === "CHEAPEST") return true
   return false
 }
 
-function isFastestSelected(value: any): any {
-  if (value === "FASTEST") return true
+function isFastestSelected(state: any): any {
+  if (state === "FASTEST") return true
   return false
 }
 
 export default function Filter() {
   const dispatch = useDispatch()
-  const { filterSelected } = useSelector(({ filterReducer }) => filterReducer)
+  const { filterSelected } = useSelector(({ ticketsListReducer }) => ticketsListReducer)
 
   const onFilterChange = (e: any): any => {
     if (e.target.value === "cheapest") return dispatch(setCheapest)
     if (e.target.value === "fastest") return dispatch(setFastest)
+    return
   }
 
   const classForCheapest = isCheapestSelected(filterSelected)

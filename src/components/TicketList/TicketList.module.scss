@@ -1,15 +1,15 @@
 .ticket-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 10px;
   width: 100%;
   min-width: 280px;
   height: auto;
   align-self: center;
+  gap: 10px;
 }
 
 button {
+  margin-top: 10px;
   border: none;
   background: none;
 }

@@ -25,6 +25,7 @@
   height: 40px;
   align-items: center;
   font-size: 13px;
+  width: 100%;
   &:hover::before {
     content: "";
     position: absolute;
@@ -39,6 +40,7 @@
     display: flex;
     padding-left: 30px;
     cursor: pointer;
+    width: 100%;
     &:hover .check-box {
       border-color: #2196f3;
     }
