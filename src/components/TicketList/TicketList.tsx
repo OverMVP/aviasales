@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { FC, useEffect } from "react"
+import React, { FC } from "react"
 import styles from "./TicketList.module.scss"
 import Ticket from "../Ticket/Ticket"
 import { useDispatch, useSelector } from "react-redux"
@@ -7,26 +7,11 @@ import { setNumberToShow } from "../../store/actions/setNumberToShow"
 import Loader from "../Loader"
 import ErrorPage from "../ErrorPage"
 import { nanoid } from "nanoid"
+import { sortFollowToCheckBoxes } from "./helpers"
 
 const { "ticket-list": ticketList, "show-more-btn": showMore } = styles
 
-function sortFollowToCheckBoxes(arr, filterTransfersObj) {
-  let sortedTickets = [...arr]
-
-  filterTransfersObj.forEach((obj) => {
-    if (!obj.isChecked) {
-      sortedTickets = sortedTickets.filter((ticket) => {
-        return (
-          ticket.segments[0].stops.length !== obj.value &&
-          ticket.segments[1].stops.length !== obj.value
-        )
-      })
-    }
-  })
-  return sortedTickets
-}
-
-function showFiveTickets(arr, tickets = 5) {
+function sliceTickets(arr, tickets = 5) {
   let newArr = arr.slice(0, tickets)
   if (newArr.length < 0) return
 
@@ -50,7 +35,7 @@ const TicketList: FC = () => {
     ({ ticketsListReducer }) => ticketsListReducer
   )
 
-  const list = showFiveTickets(sortFollowToCheckBoxes(tickets, filterTransfers), numberToShow)
+  const list = sliceTickets(sortFollowToCheckBoxes(tickets, filterTransfers), numberToShow)
 
   return (
     <>

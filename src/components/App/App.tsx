@@ -32,7 +32,7 @@ function App() {
     })
 
     return Cookies.remove("searchId")
-  }, [])
+  }, [dispatch])
 
   return (
     <>
