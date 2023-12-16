@@ -1,6 +1,6 @@
 {
   "name": "aviasales",
-  "version": "0.1.0",
+  "version": "1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -28,12 +28,25 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write ./src"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*js": [
+      "npm run lint:fix",
+      "npm run format",
+      "git add"
     ]
   },
   "browserslist": {
@@ -49,6 +62,10 @@
     ]
   },
   "devDependencies": {
-    "@redux-devtools/extension": "^3.3.0"
+    "@babel/core": "^7.23.6",
+    "@redux-devtools/extension": "^3.3.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1"
   }
 }

@@ -40,7 +40,6 @@
 
   span {
     display: flex;
-    justify-content: center;
 
     &:first-of-type {
       color: #a0b0b9;
@@ -49,14 +48,25 @@
 
   .forward-route,
   .backward-route {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
   }
 
   .route,
   .flightTime,
   .transfer {
     display: flex;
+    width: 33.3%;
     flex-direction: column;
   }
+}
+
+.flightTime span {
+  display: flex;
+  justify-content: center;
+}
+
+.transfer span {
+  display: flex;
+  justify-content: flex-end;
 }

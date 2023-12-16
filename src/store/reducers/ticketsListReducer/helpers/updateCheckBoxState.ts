@@ -4,31 +4,32 @@
 //   return forwardLength > backwardLength ? forwardLength : backwardLength
 // }
 
-export function updateCheckBoxState(state: any, id: any) {
-  const newFilters = [...state.filterTransfers]
+import { IState } from '../../../../interfaces';
 
-  const idx = newFilters.findIndex((el: any) => el.id === id)
+export function updateCheckBoxState(state: IState, id: any): IState {
+  const newFilters = [...state.filterTransfers];
+  const idx = newFilters.findIndex((el: any) => el.id === id);
 
   if (id === 0) {
-    const newChecked = !newFilters[id].isChecked
+    const newChecked = !newFilters[id].isChecked;
 
     newFilters.forEach((item) => {
-      item.isChecked = newChecked
-    })
+      item.isChecked = newChecked;
+    });
 
     return {
       ...state,
-      filters: [...state.tickets, ...newFilters],
-    }
+      filterTransfers: [...newFilters],
+    };
   }
 
-  newFilters[idx].isChecked = !newFilters[idx].isChecked
+  newFilters[idx].isChecked = !newFilters[idx].isChecked;
 
-  if (newFilters[0].isChecked) newFilters[0].isChecked = false
+  if (newFilters[0].isChecked) newFilters[0].isChecked = false;
 
   if (newFilters.slice(1).every((el) => el.isChecked) && !newFilters[0].isChecked) {
-    newFilters[0].isChecked = true
+    newFilters[0].isChecked = true;
   }
 
-  return { ...state, filters: [...newFilters] }
+  return { ...state, filterTransfers: [...newFilters] };
 }

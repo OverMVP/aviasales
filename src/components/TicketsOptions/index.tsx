@@ -1,3 +1,3 @@
-import TicketsOptions from "./TicketsOptions"
+import TicketsOptions from './TicketsOptions';
 
-export default TicketsOptions
+export default TicketsOptions;

@@ -1,13 +1,15 @@
-import React from "react"
-import styles from "./HeaderLogo.module.scss"
-import logo from "../../assets/logo.png"
+import { FC } from 'react';
+import styles from './HeaderLogo.module.scss';
+import logo from '../../assets/logo.png';
 
-const { headerContainer } = styles
+const { headerContainer } = styles;
 
-export default function HeaderLogo() {
+const HeaderLogo: FC = () => {
   return (
     <header className={headerContainer}>
       <img src={logo} alt="" />
     </header>
-  )
-}
+  );
+};
+
+export default HeaderLogo;

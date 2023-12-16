@@ -1,38 +1,27 @@
 // @ts-nocheck
-import { useEffect } from "react"
-import HeaderLogo from "../HeaderLogo"
-import Filter from "../Filter/Filter"
-import styles from "./App.module.scss"
-import TicketList from "../TicketList"
-import TicketsOptions from "../TicketsOptions"
-import Cookies from "js-cookie"
-import { useDispatch } from "react-redux"
-import { getAsyncTickets } from "../../store/asyncActions/getAsyncTickets"
+import { FC, useEffect } from 'react';
+import HeaderLogo from '../HeaderLogo';
+import Filter from '../Filter/Filter';
+import styles from './App.module.scss';
+import TicketList from '../TicketList';
+import TicketsOptions from '../TicketsOptions';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { getAsyncTickets } from '../../store/asyncActions/getAsyncTickets';
+import getSearchId from '../../api';
 
-const { pageWrapper, contentWrapper, asideWrapper, main } = styles
+const { pageWrapper, contentWrapper, asideWrapper, main } = styles;
 
-function App() {
-  const dispatch = useDispatch()
-
-  async function getSearchId() {
-    fetch("https://aviasales-test-api.kata.academy/search")
-      .then((res) => res.json())
-      .then(({ searchId }) => {
-        if (!Cookies.get("searchId")) {
-          Cookies.set("searchId", `${searchId}`)
-        }
-        return searchId
-      })
-      .catch((err) => console.log(err))
-  }
+const App: FC = () => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getSearchId().then((searchId) => {
-      dispatch(getAsyncTickets())
-    })
+    getSearchId().then(() => {
+      dispatch(getAsyncTickets());
+    });
 
-    return Cookies.remove("searchId")
-  }, [dispatch])
+    return Cookies.remove('searchId');
+  }, [dispatch]);
 
   return (
     <>
@@ -49,7 +38,7 @@ function App() {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

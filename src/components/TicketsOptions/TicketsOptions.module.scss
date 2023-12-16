@@ -27,7 +27,7 @@
   font-size: 13px;
   width: 100%;
   &:hover::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 232px;
     height: 40px;
@@ -50,7 +50,7 @@
       position: absolute;
       &:checked + .check-box {
         background-color: white;
-        background: url("../../assets/shape.svg") no-repeat;
+        background: url('../../assets/shape.svg') no-repeat;
         background-position: 50% 50%;
         border-color: #2196f3;
       }

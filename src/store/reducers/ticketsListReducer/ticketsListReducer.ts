@@ -1,79 +1,66 @@
-import { getTicketsList } from "./helpers/getTickets"
-import { getTotalFlightDuration } from "./helpers/getTotalFlightDuration"
-import { increaseNumberToShow } from "./helpers/increaseNumberToShow"
-import { sortCheapest } from "./helpers/sortCheapest"
-import { sortFastest } from "./helpers/sortFastest"
-import { updateCheckBoxState } from "./helpers/updateCheckBoxState"
+import { Reducer } from 'redux';
+import { ActionType } from '../../../enums';
+import { IAction, IActionTypes, IState } from '../../../interfaces';
+import { getTicketsList } from './helpers/getTickets';
+import { getTotalFlightDuration } from './helpers/getTotalFlightDuration';
+import { increaseNumberToShow } from './helpers/increaseNumberToShow';
+import { sortCheapest } from './helpers/sortCheapest';
+import { sortFastest } from './helpers/sortFastest';
+import { updateCheckBoxState } from './helpers/updateCheckBoxState';
 
-const defaultState = {
+const defaultState: IState = {
   tickets: [],
   stop: false,
   numberToShow: 5,
-  filterSelected: "CHEAPEST",
+  filterSelected: 'CHEAPEST',
   filterTransfers: [
     {
       id: 0,
       isChecked: true,
-      name: "Все",
-      value: "ALL",
+      name: 'Все',
+      value: -1,
     },
     {
       id: 1,
       isChecked: true,
-      name: "Без пересадок",
+      name: 'Без пересадок',
       value: 0,
     },
     {
       id: 2,
       isChecked: true,
-      name: "1 пересадка",
+      name: '1 пересадка',
       value: 1,
     },
     {
       id: 3,
       isChecked: true,
-      name: "2 пересадки",
+      name: '2 пересадки',
       value: 2,
     },
     {
       id: 4,
       isChecked: true,
-      name: "3 пересадки",
+      name: '3 пересадки',
       value: 3,
     },
   ],
-}
+};
 
-// function getFewerTransfers(ticketSegments: any) {
-//   return ticketSegments[0].stops.length > ticketSegments[1].stops.length
-//     ? ticketSegments[0].stops.length
-//     : ticketSegments[1].stops.length
-// }
-
-// function getTicketsByTransfersSort(state: any) {
-//   if (state.filterTransfers[1] === false) {
-//     return {
-//       ...state,
-//       tickets: state.tickets.filter((ticket: any) => getFewerTransfers(ticket.segments) !== 0),
-//     }
-//   }
-//   return {
-//     ...state,
-//     tickets: state.tickets.filter((ticket: any) => getFewerTransfers(ticket.segments) === 0),
-//   }
-// }
-
-export const ticketsListReducer = (state = defaultState, { type, payload }: any) => {
-  const actionTypes: any = {
-    CHECKBOX_CLICKED: () => updateCheckBoxState(state, payload),
-    GET_TICKETS: () => getTicketsList(state, getTotalFlightDuration, payload),
-    SET_NUMBER_TO_SHOW: () => increaseNumberToShow(state, payload),
-    SET_CHEAPEST: () => sortCheapest(state, payload),
-    SET_FASTEST: () => sortFastest(state, payload, getTotalFlightDuration),
-  }
+export const ticketsListReducer: Reducer<IState, IAction> = (
+  state = defaultState,
+  { type, payload }: IAction
+): IState => {
+  const actionTypes: IActionTypes = {
+    [ActionType.CHECKBOX_CLICKED]: () => updateCheckBoxState(state, payload),
+    [ActionType.GET_TICKETS]: () => getTicketsList(state, getTotalFlightDuration, payload),
+    [ActionType.SET_NUMBER_TO_SHOW]: () => increaseNumberToShow(state, payload),
+    [ActionType.SET_CHEAPEST]: () => sortCheapest(state, payload),
+    [ActionType.SET_FASTEST]: () => sortFastest(state, payload, getTotalFlightDuration),
+  };
 
   if (actionTypes.hasOwnProperty(type)) {
-    return actionTypes[type]()
+    return actionTypes[type]();
   }
-  return { ...state }
-}
+  return { ...state };
+};
